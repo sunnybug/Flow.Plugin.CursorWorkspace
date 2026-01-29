@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -121,10 +121,10 @@
     <value>helye:</value>
   </data>
   <data name="PluginDescription" xml:space="preserve">
-    <value>Megnyitja az előzőleg a VS Code által megnyitott munkaterületeket, távoli gépeket (SSH vagy Codespaces) és tárolókat.</value>
+    <value>Megnyitja az előzőleg a Cursor által megnyitott munkaterületeket, távoli gépeket (SSH vagy Codespaces) és tárolókat.</value>
   </data>
   <data name="PluginTitle" xml:space="preserve">
-    <value>Visual Studio Code</value>
+    <value>Cursor</value>
   </data>
   <data name="SSHRemoteMachine" xml:space="preserve">
     <value>Távoli SSH gép</value>

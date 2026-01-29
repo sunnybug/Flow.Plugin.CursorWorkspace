@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -133,7 +133,7 @@
     <value>自动发现工作区</value>
   </data>
   <data name="DiscoverWorkspacesTooltip" xml:space="preserve">
-    <value>从 VSCode 最近打开列表中读取工作区 (文件夹)</value>
+    <value>从 Cursor 最近打开列表中读取工作区 (文件夹)</value>
   </data>
   <data name="ExtraFolderUri" xml:space="preserve">
     <value>额外的文件夹 URI</value>
@@ -151,10 +151,10 @@
     <value>在默认文件管理器中打开文件夹</value>
   </data>
   <data name="PluginDescription" xml:space="preserve">
-    <value>在 VS Code 中打开最近使用的工作区、远程计算机(SSH 或 Codespaces)和容器。</value>
+    <value>在 Cursor 中打开最近使用的工作区、远程计算机(SSH 或 Codespaces)和容器。</value>
   </data>
   <data name="PluginTitle" xml:space="preserve">
-    <value>Visual Studio Code 工作区</value>
+    <value>Cursor 工作区</value>
   </data>
   <data name="SSHRemoteMachine" xml:space="preserve">
     <value>SSH 远程计算机</value>

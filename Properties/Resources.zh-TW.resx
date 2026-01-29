@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -121,10 +121,10 @@
     <value>於</value>
   </data>
   <data name="PluginDescription" xml:space="preserve">
-    <value>開啟先前在 VS Code 中開啟的工作區、遠端電腦 (SSH 或 Codespaces) 和容器。</value>
+    <value>開啟先前在 Cursor 中開啟的工作區、遠端電腦 (SSH 或 Codespaces) 和容器。</value>
   </data>
   <data name="PluginTitle" xml:space="preserve">
-    <value>Visual Studio Code 工作區</value>
+    <value>Cursor 工作區</value>
   </data>
   <data name="SSHRemoteMachine" xml:space="preserve">
     <value>SSH 遠端電腦</value>

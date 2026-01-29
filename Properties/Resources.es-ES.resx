@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -124,7 +124,7 @@
     <value>Abre áreas de trabajo, máquinas remotas (SSH o Codespaces) y contenedores, abiertos previamente en VS Code.</value>
   </data>
   <data name="PluginTitle" xml:space="preserve">
-    <value>Áreas de trabajo de Visual Studio Code</value>
+    <value>Áreas de trabajo de Cursor</value>
   </data>
   <data name="SSHRemoteMachine" xml:space="preserve">
     <value>Máquina remota SSH</value>

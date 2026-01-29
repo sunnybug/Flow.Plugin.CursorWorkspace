@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -121,10 +121,10 @@
     <value>om</value>
   </data>
   <data name="PluginDescription" xml:space="preserve">
-    <value>Öppnar arbetsytor, fjärrdatorer (SSH eller Codespaces) och containrar som tidigare öppnats i VS Code.</value>
+    <value>Öppnar arbetsytor, fjärrdatorer (SSH eller Codespaces) och containrar som tidigare öppnats i Cursor.</value>
   </data>
   <data name="PluginTitle" xml:space="preserve">
-    <value>Visual Studio Code-arbetsytor</value>
+    <value>Cursor-arbetsytor</value>
   </data>
   <data name="SSHRemoteMachine" xml:space="preserve">
     <value>SSH-fjärrdator</value>

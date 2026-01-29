@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation
+// Copyright (c) Microsoft Corporation
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Media.Imaging;
+using Flow.Plugin.CursorWorkspaces;
 
 namespace Flow.Plugin.CursorWorkspaces.VSCodeHelper
 {
@@ -73,7 +74,10 @@ namespace Flow.Plugin.CursorWorkspaces.VSCodeHelper
             var paths = _systemPath.Split(";").Where(path =>
                 path.Contains("VS Code", StringComparison.OrdinalIgnoreCase) ||
                 path.Contains("codium", StringComparison.OrdinalIgnoreCase) ||
-                path.Contains("vscode", StringComparison.OrdinalIgnoreCase));
+                path.Contains("vscode", StringComparison.OrdinalIgnoreCase) ||
+                path.Contains("Cursor", StringComparison.OrdinalIgnoreCase)).ToArray();
+
+            PluginLogger.Log($"[LoadVSCodeInstances] PATH 中匹配到的路径数: {paths.Length}, 路径: [{string.Join("; ", paths)}]");
 
             foreach (var path in paths)
             {
@@ -94,7 +98,7 @@ namespace Flow.Plugin.CursorWorkspaces.VSCodeHelper
                 var version = string.Empty;
 
                 var instance = new VSCodeInstance();
-                // Main._context.API.LogInfo("CursorWorkspaces", "vscodeExecFile : " + vscodeExecFile + " : " + files.Length);
+                PluginLogger.Log($"[LoadVSCodeInstances] 候选可执行文件: {vscodeExecFile}");
 
                 if (vscodeExecFile.EndsWith("code"))
                 {
@@ -146,14 +150,18 @@ namespace Flow.Plugin.CursorWorkspaces.VSCodeHelper
                 VSCodeVersion = VSCodeVersion.Stable
             };
             var cursorAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs\\cursor");
+            var cursorExePath = Path.Join(cursorAppData, "Cursor.exe");
+            var cursorExeExists = File.Exists(cursorExePath);
+            PluginLogger.Log($"[LoadVSCodeInstances] 硬编码 Cursor 路径: {cursorExePath}, 存在: {cursorExeExists}");
 
-            var cursorBitmapIcon = Icon.ExtractAssociatedIcon(Path.Join(cursorAppData, $"Cursor.exe"))?.ToBitmap();
+            var cursorBitmapIcon = Icon.ExtractAssociatedIcon(cursorExePath)?.ToBitmap();
             var cursorFolderIcon = (Bitmap)Image.FromFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//Images//folder.png");
             var cursorMonitorIcon = (Bitmap)Image.FromFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//Images//monitor.png");
             cursorInstance.WorkspaceIconBitMap = Bitmap2BitmapImage(BitmapOverlayToCenter(cursorFolderIcon, cursorBitmapIcon));
             cursorInstance.RemoteIconBitMap = Bitmap2BitmapImage(BitmapOverlayToCenter(cursorMonitorIcon, cursorBitmapIcon));
 
             Instances.Add(cursorInstance);
+            PluginLogger.Log($"[LoadVSCodeInstances] 完成. 总 Instances 数: {Instances.Count}, AppData 列表: [{string.Join("; ", Instances.Select(i => i.AppData))}]");
         }
     }
 }

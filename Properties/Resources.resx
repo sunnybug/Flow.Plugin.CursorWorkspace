@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PluginTitle" xml:space="preserve">
-    <value>Visual Studio Code Workspaces</value>
+    <value>Cursor Workspaces</value>
   </data>
   <data name="In" xml:space="preserve">
     <value>in</value>
     <comment>Used to indicate the location where something is</comment>
   </data>
   <data name="PluginDescription" xml:space="preserve">
-    <value>Opens workspaces, remote machines (SSH or Codespaces) and containers, previously opened in VS Code.</value>
+    <value>Opens workspaces, remote machines (SSH or Codespaces) and containers, previously opened in Cursor.</value>
   </data>
   <data name="SSHRemoteMachine" xml:space="preserve">
     <value>SSH remote machine</value>
   </data>
   <data name="TypeWorkspaceContainer" xml:space="preserve">
     <value>Container</value>
-    <comment>As in "Visual Studio Code workspace container type</comment>
+    <comment>As in "Cursor workspace container type</comment>
   </data>
   <data name="TypeWorkspaceLocal" xml:space="preserve">
     <value>Local</value>
@@ -140,11 +140,11 @@
   </data>
   <data name="Workspace" xml:space="preserve">
     <value>Workspace</value>
-    <comment>It refers to the "Visual Studio Code workspace"</comment>
+    <comment>It refers to the "Cursor workspace"</comment>
   </data>
   <data name="TypeWorkspaceDevContainer" xml:space="preserve">
     <value>Dev Container</value>
-    <comment>As in "Visual Studio Code Dev Container workspace "</comment>
+    <comment>As in "Cursor Dev Container workspace "</comment>
   </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
@@ -159,7 +159,7 @@
     <value>Discover Workspaces</value>
   </data>
   <data name="DiscoverWorkspacesTooltip" xml:space="preserve">
-    <value>Automatically discover workspaces (folders) from recent opened list of VSCode.</value>
+    <value>Automatically discover workspaces (folders) from recent opened list of Cursor.</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>

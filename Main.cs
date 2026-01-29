@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation
+// Copyright (c) Microsoft Corporation
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -38,6 +38,9 @@ namespace Flow.Plugin.CursorWorkspaces
             var results = new List<Result>();
             var workspaces = new List<CursorWorkspace>();
 
+            if (defaultInstance == null)
+                PluginLogger.Log("[Query] defaultInstance 为 null，自定义工作区与发现工作区将为空");
+
             // User defined extra workspaces
             if (defaultInstance != null)
                 workspaces.AddRange(_settings.CustomWorkspaces.Select(uri =>
@@ -46,6 +49,8 @@ namespace Flow.Plugin.CursorWorkspaces
             // Search opened workspaces
             if (_settings.DiscoverWorkspaces)
                 workspaces.AddRange(_workspacesApi.Workspaces);
+
+            PluginLogger.Log($"[Query] 工作区数: {workspaces.Count}, DiscoverWorkspaces: {_settings.DiscoverWorkspaces}");
 
             // Simple de-duplication
             results.AddRange(workspaces.Distinct()
@@ -67,6 +72,7 @@ namespace Flow.Plugin.CursorWorkspaces
                 }).ToList();
             }
 
+            PluginLogger.Log($"[Query] 返回结果数: {results.Count}");
 
             return results;
         }
@@ -103,12 +109,14 @@ namespace Flow.Plugin.CursorWorkspaces
                                     $"--new-window --enable-proposed-api ms-vscode-remote.remote-ssh --remote ssh-remote+{((char)34) + a.Host + ((char)34)}",
                                 WindowStyle = ProcessWindowStyle.Hidden,
                             };
+                            PluginLogger.Log($"[SSH] 启动 Process FileName={process.FileName}, Arguments={process.Arguments}");
                             Process.Start(process);
 
                             hide = true;
                         }
-                        catch (Win32Exception)
+                        catch (Win32Exception ex)
                         {
+                            PluginLogger.Log($"[SSH] Win32Exception: {ex.Message}, FileName=cursor");
                             var name = $"{_context.CurrentPluginMetadata.Name}";
                             string msg = Resources.OpenFail;
                             _context.API.ShowMsg(name, msg, string.Empty);
@@ -164,11 +172,13 @@ namespace Flow.Plugin.CursorWorkspaces
                         process.ArgumentList.Add("--folder-uri");
                         process.ArgumentList.Add(ws.Path);
 
+                        PluginLogger.Log($"[Workspace] 启动 Process FileName={process.FileName}, folder-uri={ws.Path}");
                         Process.Start(process);
                         return true;
                     }
-                    catch (Win32Exception)
+                    catch (Win32Exception ex)
                     {
+                        PluginLogger.Log($"[Workspace] Win32Exception: {ex.Message}, FileName=cursor");
                         var name = $"{_context.CurrentPluginMetadata.Name}";
                         string msg = Resources.OpenFail;
                         _context.API.ShowMsg(name, msg, string.Empty);
@@ -191,6 +201,11 @@ namespace Flow.Plugin.CursorWorkspaces
             // Prefer stable version, or the first one we got
             defaultInstance = VSCodeInstances.Instances.Find(e => e.VSCodeVersion == VSCodeVersion.Stable) ??
                               VSCodeInstances.Instances.FirstOrDefault();
+
+            if (defaultInstance == null)
+                PluginLogger.Log("[Init] defaultInstance 为 null，未找到 Cursor 实例");
+            else
+                PluginLogger.Log($"[Init] defaultInstance 已设置, AppData: {defaultInstance.AppData}");
         }
 
         public Control CreateSettingPanel() => new SettingsView(_context, _settings);

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -121,10 +121,10 @@
     <value>dans</value>
   </data>
   <data name="PluginDescription" xml:space="preserve">
-    <value>Ouvre les espaces de travail, les machines distantes (SSH ou Codespaces) et les conteneurs, précédemment ouverts dans VS Code.</value>
+    <value>Ouvre les espaces de travail, les machines distantes (SSH ou Codespaces) et les conteneurs, précédemment ouverts dans Cursor.</value>
   </data>
   <data name="PluginTitle" xml:space="preserve">
-    <value>Espaces de travail Visual Studio Code</value>
+    <value>Espaces de travail Cursor</value>
   </data>
   <data name="SSHRemoteMachine" xml:space="preserve">
     <value>Machine distante SSH</value>
