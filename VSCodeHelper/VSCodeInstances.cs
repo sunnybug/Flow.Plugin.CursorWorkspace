@@ -154,11 +154,23 @@ namespace Flow.Plugin.CursorWorkspaces.VSCodeHelper
             var cursorExeExists = File.Exists(cursorExePath);
             PluginLogger.Log($"[LoadVSCodeInstances] 硬编码 Cursor 路径: {cursorExePath}, 存在: {cursorExeExists}");
 
-            var cursorBitmapIcon = Icon.ExtractAssociatedIcon(cursorExePath)?.ToBitmap();
+            Bitmap cursorBitmapIcon = null;
+            if (cursorExeExists)
+            {
+                try
+                {
+                    cursorBitmapIcon = Icon.ExtractAssociatedIcon(cursorExePath)?.ToBitmap();
+                }
+                catch (Exception ex)
+                {
+                    PluginLogger.Log($"[LoadVSCodeInstances] 提取 Cursor 图标失败: {ex.Message}");
+                }
+            }
             var cursorFolderIcon = (Bitmap)Image.FromFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//Images//folder.png");
             var cursorMonitorIcon = (Bitmap)Image.FromFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "//Images//monitor.png");
-            cursorInstance.WorkspaceIconBitMap = Bitmap2BitmapImage(BitmapOverlayToCenter(cursorFolderIcon, cursorBitmapIcon));
-            cursorInstance.RemoteIconBitMap = Bitmap2BitmapImage(BitmapOverlayToCenter(cursorMonitorIcon, cursorBitmapIcon));
+            var iconForOverlay = cursorBitmapIcon ?? cursorFolderIcon;
+            cursorInstance.WorkspaceIconBitMap = Bitmap2BitmapImage(BitmapOverlayToCenter(cursorFolderIcon, iconForOverlay));
+            cursorInstance.RemoteIconBitMap = Bitmap2BitmapImage(BitmapOverlayToCenter(cursorMonitorIcon, iconForOverlay));
 
             Instances.Add(cursorInstance);
             PluginLogger.Log($"[LoadVSCodeInstances] 完成. 总 Instances 数: {Instances.Count}, AppData 列表: [{string.Join("; ", Instances.Select(i => i.AppData))}]");
