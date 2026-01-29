@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0-windows</TargetFramework>
+		<TargetFramework>net8.0-windows</TargetFramework>
 		<ProjectGuid>{4D971245-7A70-41D5-BAA0-DDB5684CAF51}</ProjectGuid>
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<RootNamespace>Flow.Plugin.CursorWorkspaces</RootNamespace>
@@ -46,8 +46,8 @@
 	<ItemGroup>
 		<PackageReference Include="Flow.Launcher.Plugin" Version="4.0.1" />
 		<PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
-		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.1" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.11" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Resources.Designer.cs">
