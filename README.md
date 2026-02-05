@@ -1,13 +1,13 @@
-A plugin for Flow Launcher that allows user to quickly open the recent workspace of Cursor.
+## 主要功能
+- 快速打开Visual Studio Code工作区
 
-![image](https://github.com/taooceros/Flow.Plugin.CursorWorkspace/assets/45326534/15609d5d-869f-4df4-b62a-0d0d9b3fc31a)
+![演示截图](doc/cu2.png)
 
-The default actionkeyword is `cu`.
+- 快速打开SSH远程机器工作区
 
-Remote Workspace (WSL/SSH) are also supported.
+![演示截图](doc/cu.png)
 
-![image](https://github.com/taooceros/Flow.Plugin.CursorWorkspace/assets/45326534/277df331-e124-448b-8411-d20bf6418b76)
-
-Hope you enjoy it!
-
-The original source code is from [Microsoft Powertoys](https://github.com/microsoft/PowerToys/tree/main/src/modules/launcher/Plugins/Community.PowerToys.Run.Plugin.VSCodeWorkspaces).
+## 相对于旧版本的差异
+  - 支持更多 Cursor 安装位置（便携版、标准安装、winget）
+  - SSH 主机标题添加 "SSH:" 前缀以便区分
+  - 更智能的匹配机制

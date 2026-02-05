@@ -12,8 +12,9 @@ namespace Flow.Plugin.CursorWorkspaces
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Linq;
-    using System.Windows.Controls;
+using System.Linq;
+using System.Runtime.Versioning;
+using System.Windows.Controls;
     using VSCodeHelper;
     using WorkspacesHelper;
 
@@ -203,6 +204,7 @@ namespace Flow.Plugin.CursorWorkspaces
             };
         }
 
+        [SupportedOSPlatform("windows")]
         public void Init(PluginInitContext context)
         {
             _context = context;
