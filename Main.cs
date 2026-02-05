@@ -38,41 +38,54 @@ namespace Flow.Plugin.CursorWorkspaces
             var results = new List<Result>();
             var workspaces = new List<CursorWorkspace>();
 
-            if (defaultInstance == null)
-                PluginLogger.Log("[Query] defaultInstance 为 null，自定义工作区与发现工作区将为空");
-
             // User defined extra workspaces
+            var customWorkspaceCount = 0;
             if (defaultInstance != null)
-                workspaces.AddRange(_settings.CustomWorkspaces.Select(uri =>
-                    CursorWorkspacesApi.ParseVSCodeUri(uri, defaultInstance)));
+            {
+                var customWorkspaces = _settings.CustomWorkspaces.Select(uri =>
+                    CursorWorkspacesApi.ParseVSCodeUri(uri, defaultInstance)).ToList();
+                customWorkspaceCount = customWorkspaces.Count(w => w != null);
+                workspaces.AddRange(customWorkspaces);
+            }
 
             // Search opened workspaces
+            var discoveredWorkspaceCount = 0;
             if (_settings.DiscoverWorkspaces)
-                workspaces.AddRange(_workspacesApi.Workspaces);
-
-            PluginLogger.Log($"[Query] 工作区数: {workspaces.Count}, DiscoverWorkspaces: {_settings.DiscoverWorkspaces}");
+            {
+                var discoveredWorkspaces = _workspacesApi.Workspaces;
+                discoveredWorkspaceCount = discoveredWorkspaces.Count;
+                workspaces.AddRange(discoveredWorkspaces);
+            }
 
             // Simple de-duplication
-            results.AddRange(workspaces.Distinct()
-                .Select(CreateWorkspaceResult)
-            );
+            var distinctWorkspaces = workspaces.Distinct().ToList();
+            results.AddRange(distinctWorkspaces.Select(CreateWorkspaceResult));
+
+            // 输出汇总日志
+            _context.API.LogInfo("CursorWorkspaces",
+                $"数据汇总: 自定义工作区={customWorkspaceCount}, 发现的工作区={discoveredWorkspaceCount}, " +
+                $"去重后={distinctWorkspaces.Count}, 远程机器={(_settings.DiscoverMachines ? _machinesApi.Machines.Count : 0)}");
 
             // Search opened remote machines
             if (_settings.DiscoverMachines)
                 results.AddRange(GetResultFromOpenedRemoteMachines());
-
 
             if (query.ActionKeyword == string.Empty ||
                 (query.ActionKeyword != string.Empty && query.Search != string.Empty))
             {
                 results = results.Where(r =>
                 {
-                    r.Score = _context.API.FuzzySearch(query.Search, r.Title).Score;
+                    var matchResult = _context.API.FuzzySearch(query.Search, r.Title);
+                    r.Score = matchResult.Score;
+                    // 当模糊搜索得分为 0 时，用子串匹配兜底（例如 "kr1" 匹配 "43.128.131.41-proxy-kr1"）
+                    if (r.Score == 0 && !string.IsNullOrWhiteSpace(query.Search) &&
+                        r.Title.Contains(query.Search, StringComparison.OrdinalIgnoreCase))
+                    {
+                        r.Score = 1;
+                    }
                     return r.Score > 0;
                 }).ToList();
             }
-
-            PluginLogger.Log($"[Query] 返回结果数: {results.Count}");
 
             return results;
         }
@@ -82,7 +95,7 @@ namespace Flow.Plugin.CursorWorkspaces
             var results = new List<Result>();
             _machinesApi.Machines.ForEach(a =>
             {
-                var title = $"{a.Host}";
+                var title = $"SSH: {a.Host}";
 
                 if (!string.IsNullOrEmpty(a.User) && !string.IsNullOrEmpty(a.HostName))
                     title += $" [{a.User}@{a.HostName}]";
