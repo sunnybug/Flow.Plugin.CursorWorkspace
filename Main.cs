@@ -34,6 +34,14 @@ using System.Windows.Controls;
 
         private readonly VSCodeRemoteMachinesApi _machinesApi = new();
 
+        /// <summary>
+        /// 返回用于启动 Cursor 的可执行文件路径。若用户已配置则用配置值，否则为 "Cursor.exe"。
+        /// </summary>
+        private string GetCursorFileName() =>
+            string.IsNullOrWhiteSpace(_settings?.CursorExecutablePath)
+                ? "Cursor.exe"
+                : _settings.CursorExecutablePath.Trim();
+
         public List<Result> Query(Query query)
         {
             var results = new List<Result>();
@@ -117,7 +125,7 @@ using System.Windows.Controls;
                         {
                             var process = new ProcessStartInfo
                             {
-                                FileName = "cursor",
+                                FileName = GetCursorFileName(),
                                 UseShellExecute = true,
                                 Arguments =
                                     $"--new-window --enable-proposed-api ms-vscode-remote.remote-ssh --remote ssh-remote+{((char)34) + a.Host + ((char)34)}",
@@ -130,7 +138,7 @@ using System.Windows.Controls;
                         }
                         catch (Win32Exception ex)
                         {
-                            PluginLogger.Log($"[SSH] Win32Exception: {ex.Message}, FileName=cursor");
+                            PluginLogger.Log($"[SSH] Win32Exception: {ex.Message}, FileName={GetCursorFileName()}");
                             var name = $"{_context.CurrentPluginMetadata.Name}";
                             string msg = Resources.OpenFail;
                             _context.API.ShowMsg(name, msg, string.Empty);
@@ -179,7 +187,7 @@ using System.Windows.Controls;
 
                         var process = new ProcessStartInfo
                         {
-                            FileName = "cursor",
+                            FileName = GetCursorFileName(),
                             UseShellExecute = true,
                             WindowStyle = ProcessWindowStyle.Hidden,
                         };
@@ -192,7 +200,7 @@ using System.Windows.Controls;
                     }
                     catch (Win32Exception ex)
                     {
-                        PluginLogger.Log($"[Workspace] Win32Exception: {ex.Message}, FileName=cursor");
+                        PluginLogger.Log($"[Workspace] Win32Exception: {ex.Message}, FileName={GetCursorFileName()}");
                         var name = $"{_context.CurrentPluginMetadata.Name}";
                         string msg = Resources.OpenFail;
                         _context.API.ShowMsg(name, msg, string.Empty);

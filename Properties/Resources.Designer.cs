@@ -191,6 +191,28 @@ namespace Flow.Plugin.CursorWorkspaces.Properties
         }
 
         /// <summary>
+        ///   查找类似 Cursor executable path 的本地化字符串。
+        /// </summary>
+        public static string CursorExecutablePath
+        {
+            get
+            {
+                return ResourceManager.GetString("CursorExecutablePath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Full path to Cursor.exe. Leave empty to use Cursor.exe from PATH. 的本地化字符串。
+        /// </summary>
+        public static string CursorExecutablePathTooltip
+        {
+            get
+            {
+                return ResourceManager.GetString("CursorExecutablePathTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Opens workspaces, remote machines (SSH or Codespaces) and containers, previously opened in Cursor. 的本地化字符串。
         /// </summary>
         public static string PluginDescription

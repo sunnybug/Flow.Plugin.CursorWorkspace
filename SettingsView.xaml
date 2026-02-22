@@ -10,13 +10,23 @@
     <Grid Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="14,8,14,4">
+            <TextBlock Text="{x:Static resx:Resources.CursorExecutablePath}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox
+                Text="{Binding CursorExecutablePath, UpdateSourceTrigger=LostFocus}"
+                ToolTip="{x:Static resx:Resources.CursorExecutablePathTooltip}"
+                MinWidth="280"
+                LostFocus="Save"/>
+        </StackPanel>
         <StackPanel
-            Grid.Row="0"
+            Grid.Row="1"
             Width="Auto"
-            Orientation="Horizontal">
+            Orientation="Horizontal"
+            Margin="0,4,0,8">
             <CheckBox
                 Width="220"
                 Margin="70,8,10,8"
@@ -35,7 +45,7 @@
         </StackPanel>
         <ListView
             x:Name="listView"
-            Grid.Row="1"
+            Grid.Row="2"
             Margin="14,0,14,0"
             BorderBrush="DarkGray"
             BorderThickness="1"
@@ -48,7 +58,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <DockPanel Grid.Row="2"
+        <DockPanel Grid.Row="3"
                 Margin="14,0,14,10">
             <StackPanel DockPanel.Dock="Right"
                     Orientation="Horizontal">

@@ -73,6 +73,7 @@ dotnet publish Flow.Plugin.CursorWorkspaces.csproj -r win-x64 -c Release -o "Flo
 - **[Settings.cs](Settings.cs)** - 用户配置：
   - `DiscoverWorkspaces` - 自动发现工作区
   - `DiscoverMachines` - 自动发现远程机器
+  - `CursorExecutablePath` - Cursor 可执行文件路径（留空则使用 PATH 中的 Cursor.exe）
   - `CustomWorkspaces` - 用户自定义工作区 URI 列表
 - **[SettingsView.xaml](SettingsView.xaml)** + **[SettingsView.xaml.cs](SettingsView.xaml.cs)** - WPF 设置界面
 

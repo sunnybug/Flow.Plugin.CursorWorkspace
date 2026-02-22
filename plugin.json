@@ -4,7 +4,7 @@
   "ActionKeyword": "cu",
   "Name": "Cursor Workspaces",
   "Author": "xsw",
-  "Version": "2.0.3",
+  "Version": "2.0.4",
   "Language": "csharp",
   "Website": "https://github.com/sunnybug/Flow.Plugin.CursorWorkspace",
   "ExecuteFileName": "Flow.Plugin.CursorWorkspaces.dll",
