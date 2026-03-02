@@ -96,3 +96,6 @@ dotnet publish Flow.Plugin.CursorWorkspaces.csproj -r win-x64 -c Release -o "Flo
 ## 源代码来源
 
 逻辑参考 [Flow.Plugin.VSCodeWorkspace](https://github.com/sunnybug/Flow.Plugin.VSCodeWorkspace) 与 [Microsoft PowerToys VSCodeWorkspaces](https://github.com/microsoft/PowerToys/tree/main/src/modules/launcher/Plugins/Community.PowerToys.Run.Plugin.VSCodeWorkspaces)，已适配 Flow Launcher API 与 Cursor 命令行（`cursor`）。
+
+## Flow Launcher log路径
+%APPDATA%\FlowLauncher\Logs\2.0.3\

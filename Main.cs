@@ -7,11 +7,12 @@ namespace Flow.Plugin.CursorWorkspaces
     using Flow.Launcher.Plugin;
     using Properties;
     using RemoteMachinesHelper;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Globalization;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Windows.Controls;
@@ -65,6 +66,11 @@ using System.Windows.Controls;
                 discoveredWorkspaceCount = discoveredWorkspaces.Count;
                 workspaces.AddRange(discoveredWorkspaces);
             }
+
+            // 不显示本地且目录已不存在的工作区
+            workspaces = workspaces
+                .Where(ws => ws != null && (ws.TypeWorkspace != TypeWorkspace.Local || Directory.Exists(SystemPath.RealPath(ws.RelativePath))))
+                .ToList();
 
             // Simple de-duplication
             var distinctWorkspaces = workspaces.Distinct().ToList();
